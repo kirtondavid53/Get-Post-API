@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FreeapiService } from './services/freeapi.service';
 import { Comments } from './classes/comments'
+import { Posts } from './classes/post'
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { Comments } from './classes/comments'
 export class AppComponent {
   title = 'get-post-api';
   lstcomments : Comments[];
+  lstpost : Posts[];
   constructor(private freeApiService: FreeapiService) { }
 
   ngOnInit(){
@@ -18,6 +20,14 @@ export class AppComponent {
     (
       data => {
         this.lstcomments = data;
+      }
+    );
+
+    this.freeApiService.getCommentsByParameter()
+    .subscribe
+    (
+      data => {
+        this.lstpost = data;
       }
     );
   }
