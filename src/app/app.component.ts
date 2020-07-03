@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'get-post-api';
   lstcomments : Comments[];
   lstpost : Posts[];
+  objPosts : Posts;
   constructor(private freeApiService: FreeapiService) { }
 
   ngOnInit(){
@@ -30,6 +31,19 @@ export class AppComponent {
         this.lstpost = data;
       }
     );
+    
+    var opost = new Posts();
+    opost.body = 'testbody';
+    opost.title = 'testtitle';
+    opost.userId = 5;
+
+    this.freeApiService.post(opost)
+    .subscribe(
+      data => {
+        this.objPosts = data;
+      }
+    );
   }
+  
 
 }
